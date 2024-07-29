@@ -1,0 +1,103 @@
+dotnet new webapi -n dfdsMicroserviceProject --no-https
+
+dotnet add package Microsoft.AspNetCore.OpenApi
+dotnet add package Microsoft.EntityFrameworkCore
+dotnet add package Microsoft.EntityFrameworkCore.SqlServer
+dotnet add package Microsoft.EntityFrameworkCore.Tools
+dotnet add package Npgsql.EntityFrameworkCore.PostgreSQL
+dotnet add package Swashbuckle.AspNetCore
+
+dotnet list package -> to show the packages used
+
+**DATABASE**:
+
+For creating the database:
+
+https://www.sqlshack.com/setting-up-a-postgresql-database-on-mac/
+
+For migrations:
+
+dotnet ef migrations add NameOfTheMigration
+
+dotnet ef database update
+
+More on Controller action return types in ASP.NET Core web API:
+
+https://learn.microsoft.com/en-us/aspnet/core/web-api/action-return-types?view=aspnetcore-8.0#actionresultt-type
+
+Passenger JSON Samples:
+
+{
+  "firstName": "Tufan",
+  "lastName": "Usta",
+  "passportNumber": "TR123456789",
+  "nationality": "TR"
+}
+
+{
+  "firstName": "Cristina",
+  "lastName": "Espinosa",
+  "passportNumber": "MEX123456789",
+  "nationality": "MEX"
+}
+
+{
+  "firstName": "Gokay",
+  "lastName": "Dogan",
+  "passportNumber": "TR11111111",
+  "nationality": "TR"
+}
+
+https://stackoverflow.com/questions/10822656/entity-framework-include-multiple-levels-of-properties
+
+Booking JSON Samples:
+
+{
+    "BookingPassengers": [
+        {
+            "PassengerId": 1
+        },
+        {
+            "PassengerId": 2
+        }
+    ]
+}
+
+{
+    "BookingPassengers": [
+        {
+            "NewPassenger": {
+                "FirstName": "Tufan",
+                "LastName": "Usta",
+                "PassportNumber": "TR123456789",
+                "Nationality": "TR"
+            }
+        },
+        {
+            "PassengerId": 6
+        }
+    ]
+}
+
+
+{
+    "BookingPassengers": [
+        {
+            "PassengerId": 1
+        },
+        {
+            "PassengerId": 2
+        }
+    ]
+}
+
+
+docker-compose build
+docker-compose up -d
+
+docker-compose down
+docker ps
+
+If we want docker explicitly to connect localhost.
+
+- ConnectionStrings__DefaultConnection=Host=host.docker.internal;Port=5432;Database=ReservationDb;Username=newuser;Password=password

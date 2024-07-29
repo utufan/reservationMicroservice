@@ -1,0 +1,28 @@
+services:
+  dfdsmicroserviceproject:
+    image: dfdsmicroserviceproject
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    ports:
+      - "5265:5265"
+    depends_on:
+      - db
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=Host=db;Port=5432;Database=ReservationDatabase;Username=newuser;Password=password
+
+  db:
+    image: postgres:latest
+    restart: always
+    environment:
+      POSTGRES_USER: newuser
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: ReservationDatabase
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
