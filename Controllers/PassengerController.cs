@@ -1,6 +1,6 @@
-using dfdsMicroserviceProject.Models;
-using dfdsMicroserviceProject.Repositories;
 using Microsoft.AspNetCore.Mvc;
+using dfdsMicroserviceProject.Services;
+using dfdsMicroserviceProject.Models;
 
 namespace dfdsMicroserviceProject.Controllers
 {
@@ -8,24 +8,24 @@ namespace dfdsMicroserviceProject.Controllers
     [ApiController]
     public class PassengerController : ControllerBase
     {
-        private readonly IPassengerRepository _passengerRepository;
+        private readonly IPassengerService _passengerService;
 
-        public PassengerController(IPassengerRepository passengerRepository)
+        public PassengerController(IPassengerService passengerService)
         {
-            _passengerRepository = passengerRepository;
+            _passengerService = passengerService;
         }
 
         [HttpGet]
         public ActionResult<IEnumerable<Passenger>> GetPassengers()
         {
-            var passengers = _passengerRepository.GetAllPassengers();
+            var passengers = _passengerService.GetAllPassengers();
             return Ok(passengers);
         }
 
         [HttpGet("{id}")]
         public ActionResult<Passenger> GetPassenger(int id)
         {
-            var passenger = _passengerRepository.GetPassengerById(id);
+            var passenger = _passengerService.GetPassengerById(id);
 
             if (passenger == null)
             {
@@ -38,8 +38,8 @@ namespace dfdsMicroserviceProject.Controllers
         [HttpPost]
         public ActionResult<Passenger> PostPassenger(Passenger passenger)
         {
-            _passengerRepository.AddPassenger(passenger);
-            return CreatedAtAction(nameof(GetPassenger), new { id = passenger.Id }, passenger);
+            var createdPassenger = _passengerService.AddPassenger(passenger);
+            return CreatedAtAction(nameof(GetPassenger), new { id = createdPassenger.Id }, createdPassenger);
         }
 
         [HttpPut("{id}")]
@@ -50,21 +50,24 @@ namespace dfdsMicroserviceProject.Controllers
                 return BadRequest();
             }
 
-            _passengerRepository.UpdatePassenger(passenger);
+            var result = _passengerService.UpdatePassenger(passenger);
+            if (!result)
+            {
+                return NotFound();
+            }
+            
             return NoContent();
         }
 
         [HttpDelete("{id}")]
         public IActionResult DeletePassenger(int id)
         {
-            var passenger = _passengerRepository.GetPassengerById(id);
-
-            if (passenger == null)
+            var result = _passengerService.DeletePassenger(id);
+            if (!result)
             {
                 return NotFound();
             }
             
-            _passengerRepository.DeletePassenger(id);
             return NoContent();
         }
     }

@@ -3,6 +3,8 @@ using dfdsMicroserviceProject.Data;
 using Microsoft.OpenApi.Models;
 using dfdsMicroserviceProject.Repositories;
 using System.Text.Json.Serialization;
+using dfdsMicroserviceProject.Services;
+using dfdsMicroserviceProject.Services.Interfaces;
 
 
 
@@ -19,7 +21,9 @@ builder.Services.AddDbContext<ReservationContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddScoped<IPassengerRepository, PassengerRepository>();
+//builder.Services.AddScoped<IPassengerService, PassengerService>();
 builder.Services.AddScoped<IBookingRepository, BookingRepository>();
+//builder.Services.AddScoped<IBookingService, BookingService>();
 
 
 builder.Services.AddEndpointsApiExplorer();
