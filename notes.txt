@@ -101,3 +101,19 @@ docker ps
 If we want docker explicitly to connect localhost.
 
 - ConnectionStrings__DefaultConnection=Host=host.docker.internal;Port=5432;Database=ReservationDb;Username=newuser;Password=password
+
+
+Unit tests:
+
+dotnet add package Moq
+
+dotnet add package xunit
+dotnet add package xunit.runner.visualstudio
+
+dotnet add package xunit.runner.console
+
+[Fact] -> says that the method is a unit test. Belongs to the xunit framework.
+
+Normally, the best practice -> creating a new test project.
+
+dotnet new xunit -n dfdsMicroserviceProject.Tests under the project folder.
