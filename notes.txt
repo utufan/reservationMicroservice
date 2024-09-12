@@ -105,15 +105,21 @@ If we want docker explicitly to connect localhost.
 
 Unit tests:
 
-dotnet add package Moq
-
-dotnet add package xunit
-dotnet add package xunit.runner.visualstudio
-
-dotnet add package xunit.runner.console
 
 [Fact] -> says that the method is a unit test. Belongs to the xunit framework.
 
 Normally, the best practice -> creating a new test project.
 
 dotnet new xunit -n dfdsMicroserviceProject.Tests under the project folder.
+
+dotnet sln add dfdsMicroserviceProject.Tests/dfdsMicroserviceProject.Tests.csproj
+
+dotnet add dfdsMicroserviceProject.Tests reference dfdsMicroserviceProject/dfdsMicroserviceProject.csproj
+
+Then I need to add the necessary packages:
+
+dotnet add package Moq
+dotnet add package xunit
+dotnet add package xunit.runner.visualstudio
+dotnet add package xunit.runner.console
+
