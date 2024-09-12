@@ -13,6 +13,7 @@ namespace dfdsMicroserviceProject.Controllers
         public PassengerController(IPassengerService passengerService)
         {
             _passengerService = passengerService;
+            // _passengerService = new PassengerService();
         }
 
         [HttpGet]
@@ -58,6 +59,7 @@ namespace dfdsMicroserviceProject.Controllers
             
             return NoContent();
         }
+
 
 
         [HttpDelete("{id}")]

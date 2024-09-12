@@ -112,11 +112,13 @@ Normally, the best practice -> creating a new test project.
 
 dotnet new xunit -n dfdsMicroserviceProject.Tests under the project folder.
 
-dotnet sln add dfdsMicroserviceProject.Tests/dfdsMicroserviceProject.Tests.csproj
+dotnet sln add dfdsMicroserviceProject.Tests/dfdsMicroserviceProject.Tests.csproj 
+-> Or do same for all projects if you moved the project structure
 
 dotnet add dfdsMicroserviceProject.Tests reference dfdsMicroserviceProject/dfdsMicroserviceProject.csproj
+-> This is so that the project sees the classes of the other
 
-Then I need to add the necessary packages:
+Then the necessary packages:
 
 dotnet add package Moq
 dotnet add package xunit
