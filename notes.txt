@@ -123,3 +123,17 @@ dotnet add package xunit
 dotnet add package xunit.runner.visualstudio
 dotnet add package xunit.runner.console
 
+
+
+Sample project structure should be:
+
+/SolutionFolder
+  |-- dfdsMicroserviceProject/            
+  |   |-- dfdsMicroserviceProject.csproj
+  |   |-- 
+  |
+  |-- dfdsMicroserviceProject.Tests/
+  |   |-- dfdsMicroserviceProject.Tests.csproj
+  |   |-- unit test files
+  |
+  |-- dfdsMicroserviceProject.sln
